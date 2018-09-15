@@ -1,0 +1,4 @@
+class FantasyProjections::Scraper
+  
+end 
+
