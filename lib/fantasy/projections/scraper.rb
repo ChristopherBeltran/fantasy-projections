@@ -21,15 +21,13 @@ end
 end
 
 def self.qb_points_scraper
+  points = []
   points_columns = [14,25,36,47,58,69,80,91,102,113,124,135,146,157,168,179,190,201,212,223]
-  points_columns.map do |x|
-  points = @doc.css("td")[x].text
-  @@all.each do |player|
-    player[:projection] = points
-  end
-end 
+  points_columns.each do |x|
+    points << @doc.css("td")[x].text
+  end 
+  @@all.zip(points).each do |player, proj|
+    player[:projection] = proj
+  end 
 end
-end 
-Scraper.qb_scraper
-Scraper.qb_points_scraper
-binding.pry
+end
