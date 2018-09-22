@@ -64,6 +64,25 @@ class Scraper
        player[:projection] = @doc.css("td")[proj].text
        end 
   end
+  
+  def self.te_scraper
+  @doc = Nokogiri::HTML(open("https://www.fantasypros.com/nfl/projections/te.php"))
+    player_label = @doc.css(".player-label")
+    player_label.css(".player-name").take(15).each do |player_name|
+    @te_hash = {
+    :name => player_name.text
+    }
+    @@all << @te_hash
+    end
+  end
+
+  def self.te_points_scraper
+  points_columns = [8,14,20,26,32,38,44,50,56,62,68,74,80,86,92]
+     @@all[80..94].zip(points_columns).each do |player, proj|
+       player[:projection] = @doc.css("td")[proj].text
+       end 
+  end
+  
 end
 Scraper.qb_scraper
 Scraper.qb_points_scraper
@@ -71,4 +90,6 @@ Scraper.rb_scraper
 Scraper.rb_points_scraper
 Scraper.wr_scraper
 Scraper.wr_points_scraper
+Scraper.te_scraper
+Scraper.te_points_scraper
 binding.pry
