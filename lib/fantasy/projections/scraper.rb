@@ -60,7 +60,7 @@ class Scraper
 
   def self.wr_points_scraper
   points_columns = [12,21,30,39,48,57,66,75,84,93,102,111,120,129,138,147,156,165,174,183,192,201,210,219,228,237,246,255,264,273]
-     @@all[20..49].zip(points_columns).each do |player, proj|
+     @@all[50..79].zip(points_columns).each do |player, proj|
        player[:projection] = @doc.css("td")[proj].text
        end 
   end
@@ -69,4 +69,6 @@ Scraper.qb_scraper
 Scraper.qb_points_scraper
 Scraper.rb_scraper
 Scraper.rb_points_scraper
+Scraper.wr_scraper
+Scraper.wr_points_scraper
 binding.pry
