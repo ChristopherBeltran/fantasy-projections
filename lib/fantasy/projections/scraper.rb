@@ -83,13 +83,23 @@ class Scraper
        end 
   end
   
-end
-Scraper.qb_scraper
-Scraper.qb_points_scraper
-Scraper.rb_scraper
-Scraper.rb_points_scraper
-Scraper.wr_scraper
-Scraper.wr_points_scraper
-Scraper.te_scraper
-Scraper.te_points_scraper
-binding.pry
+  def self.profile_scraper
+    @doc = Nokogiri::HTML(open("https://www.fantasypros.com/nfl/players/tom-brady.php"))
+    @profile_hash = {}
+    @profile_hash[:week] = @doc.css(".outlook").css("h4").text
+    @profile_hash[:next_game] = @doc.css(".outlook").css(".next-game").text.strip.gsub("\n",'')
+    @profile_hash[:news] = @doc.css(".content").css("p").first.text
+    stat_names = []
+    @doc.css(".all-stats").css("th").each do |stat|
+      stat_names << stat.text
+    @profile_hash[:stat_categories] = stat_names
+    stat_contents = []
+    @doc.css(".all-stats").css("td").each do |stat|
+      stat_contents << stat.text
+    @profile_hash[:stat_totals] = stat_contents
+      end 
+    end
+    @profile_hash
+  end 
+  end 
+  
