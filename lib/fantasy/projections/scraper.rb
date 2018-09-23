@@ -3,12 +3,18 @@ require 'nokogiri'
 require 'open-uri'
 
 class Scraper
-  attr_accessor :qb_hash, :rb_hash
   
 @@all = []
 
-  def self.all
-    @@all 
+  def self.scrape_all
+    self.qb_scraper
+    self.qb_points_scraper
+    self.rb_scraper
+    self.rb_points_scraper
+    self.wr_scraper
+    self.wr_points_scraper
+    self.te_scraper
+    self.te_points_scraper
   end 
   
   def self.qb_scraper
@@ -83,8 +89,8 @@ class Scraper
        end 
   end
   
-  def self.profile_scraper
-    @doc = Nokogiri::HTML(open("https://www.fantasypros.com/nfl/players/tom-brady.php"))
+  def self.profile_scraper(player)
+    @doc = Nokogiri::HTML(open("https://www.fantasypros.com/nfl/players/#{player}.php"))
     @profile_hash = {}
     @profile_hash[:week] = @doc.css(".outlook").css("h4").text
     @profile_hash[:next_game] = @doc.css(".outlook").css(".next-game").text.strip.gsub("\n",'')
