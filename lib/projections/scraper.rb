@@ -1,25 +1,8 @@
-require 'pry'
-require 'nokogiri'
-require 'open-uri'
-
-class Scraper
+class Projections::Scraper
   
 @@all = []
 
-  def self.scrape_all
-    self.qb_scraper
-    self.qb_points_scraper
-    self.rb_scraper
-    self.rb_points_scraper
-    self.wr_scraper
-    self.wr_points_scraper
-    self.te_scraper
-    self.te_points_scraper
-    
-    @@all
-  end 
-  
-  def self.qb_scraper
+ def self.qb_scraper
     @qb_doc = Nokogiri::HTML(open("https://www.fantasypros.com/nfl/projections/qb.php"))
     player_label = @qb_doc.css(".player-label")
     player_label.css(".player-name").take(20).each do |player_name|
@@ -37,59 +20,7 @@ class Scraper
     end 
   end
 
-  def self.rb_scraper
-  @rb_doc = Nokogiri::HTML(open("https://www.fantasypros.com/nfl/projections/rb.php"))
-    player_label = @rb_doc.css(".player-label")
-    player_label.css(".player-name").take(30).each do |player_name|
-    @rb_hash = {
-    :name => player_name.text
-    }
-    @@all << @rb_hash
-    end
-  end
-
-  def self.rb_points_scraper
-  points_columns = [12,21,30,39,48,57,66,75,84,93,102,111,120,129,138,147,156,165,174,183,192,201,210,219,228,237,246,255,264,273]
-     @@all[20..49].zip(points_columns).each do |player, proj|
-       player[:projection] = @rb_doc.css("td")[proj].text
-       end 
-  end
-  
-  def self.wr_scraper
-  @wr_doc = Nokogiri::HTML(open("https://www.fantasypros.com/nfl/projections/wr.php"))
-    player_label = @wr_doc.css(".player-label")
-    player_label.css(".player-name").take(30).each do |player_name|
-    @wr_hash = {
-    :name => player_name.text
-    }
-    @@all << @wr_hash
-    end
-  end
-
-  def self.wr_points_scraper
-  points_columns = [12,21,30,39,48,57,66,75,84,93,102,111,120,129,138,147,156,165,174,183,192,201,210,219,228,237,246,255,264,273]
-     @@all[50..79].zip(points_columns).each do |player, proj|
-       player[:projection] = @wr_doc.css("td")[proj].text
-       end 
-  end
-  
-  def self.te_scraper
-  @te_doc = Nokogiri::HTML(open("https://www.fantasypros.com/nfl/projections/te.php"))
-    player_label = @te_doc.css(".player-label")
-    player_label.css(".player-name").take(15).each do |player_name|
-    @te_hash = {
-    :name => player_name.text
-    }
-    @@all << @te_hash
-    end
-  end
-
-  def self.te_points_scraper
-  points_columns = [8,14,20,26,32,38,44,50,56,62,68,74,80,86,92]
-     @@all[80..94].zip(points_columns).each do |player, proj|
-       player[:projection] = @te_doc.css("td")[proj].text
-       end 
-  end
+ 
   
   def self.profile_scraper(player)
     @doc = Nokogiri::HTML(open("https://www.fantasypros.com/nfl/players/#{player}.php"))

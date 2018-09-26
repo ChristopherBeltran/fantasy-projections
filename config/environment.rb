@@ -1,8 +1,10 @@
-require "fantasy/projections/version"
 require 'pry'
+require 'bundler'
+Bundler.require
 require 'nokogiri'
 require 'open-uri'
 
-require_relative '../lib/fantasy/projections/cli'
-require_relative '../lib/fantasy/projections/scraper'
-require_relative '../lib/fantasy/projections/version'
+require_relative '../lib/projections/version'
+require_relative '../lib/projections/cli'
+require_relative '../lib/projections/scraper'
+

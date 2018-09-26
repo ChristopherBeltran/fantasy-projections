@@ -1,9 +1,7 @@
-class FantasyProjections::CLI
+class Projections::CLI
 
 def call
-  FantasyProjections::Scraper.new.make_list
-  puts "Welcome to Fantasy Football Projections!"
-  start
+  
 end 
 
 def start

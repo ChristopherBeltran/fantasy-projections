@@ -1,17 +1,17 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "fantasy/projections/version"
+require "projections/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "fantasy-projections"
-  spec.version       = Fantasy::Projections::VERSION
+  spec.version       = Projections::VERSION
   spec.authors       = ["'Christopher Beltran'"]
   spec.email         = ["'christod.beltran@gmail.com'"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{"Gem that will display the top Quarterbacks in fantasy football for the week".}
+  spec.description   = %q{"Placeholder"}
+  spec.homepage      = "https://github.com/ChristopherBeltran/fantasy-projections"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
