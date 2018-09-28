@@ -1,4 +1,7 @@
+#!/usr/bin/env ruby
+
 require "bundler/setup"
-require "projections"
+require_relative "../lib/projections/cli"
+require_relative "../lib/projections/scraper"
 
 Projections::CLI.new.call

@@ -1,6 +1,10 @@
+require 'pry'
+
 class Projections::CLI
 
 def call
+  Projections::Scraper.qb_scraper
+  start
   
 end 
 
@@ -24,11 +28,4 @@ end
   
 end 
 
-
-
-
-
-
-
-end 
 

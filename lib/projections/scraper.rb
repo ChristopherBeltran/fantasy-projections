@@ -3,10 +3,8 @@ require 'nokogiri'
 require 'open-uri'
 require_relative 'player'
 
-class Scraper
+class Projections::Scraper
   
-@@all = []
-
  def self.qb_scraper
     @qb_doc = Nokogiri::HTML(open("https://www.fantasypros.com/nfl/projections/qb.php"))
     player_label = @qb_doc.css(".player-label")
