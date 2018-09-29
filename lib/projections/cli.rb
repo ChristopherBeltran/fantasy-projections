@@ -3,15 +3,15 @@ require 'pry'
 class Projections::CLI
 
 def call
-  Projections::Scraper.qb_scraper
-  start
-  
-end 
+  Projections::Scraper.scrape_all
+  Projections::Player.display
+  binding.pry
+  end 
 
 def start
-  puts "You can view the upcoming weeks projections for the top players."
-  puts "Would you like to view the top overall player projections? Press 1"
-  puts "Or would you like to view top player projections by position? Press 2"
+  puts "Welcome to Fantasy Quarterbacks!"
+  puts "You can view in-depth stats for this weeks top fantasy football quarterbacks."
+  puts "Please select the # of the QB you'd like to view stats for."
   
   input = gets.strip
   

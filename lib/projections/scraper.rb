@@ -3,20 +3,26 @@ require 'nokogiri'
 require 'open-uri'
 require_relative 'player'
 
-class Scraper
+class Projections::Scraper
+  
+  def self.scrape_all
+    self.qb_scraper
+    self.qb_points_scraper
+    self.url_scraper
+  end 
   
  def self.qb_scraper
     @qb_doc = Nokogiri::HTML(open("https://www.fantasypros.com/nfl/projections/qb.php"))
     player_label = @qb_doc.css(".player-label")
     player_label.css(".player-name").take(20).each do |player_name|
-      player = Player.new
+      player = Projections::Player.new
       player.name = player_name.text
     end
   end
 
   def self.qb_points_scraper
   points_columns = [14,25,36,47,58,69,80,91,102,113,124,135,146,157,168,179,190,201,212,223]
-    Player.all.zip(points_columns).each do |player, proj|
+    Projections::Player.all.zip(points_columns).each do |player, proj|
       player.projection = @qb_doc.css("td")[proj].text
     end 
   end
@@ -28,7 +34,7 @@ class Scraper
      if i.include? "php"
        pro << i
      end 
-     Player.all.zip(pro).each do |player, link|
+     Projections::Player.all.zip(pro).each do |player, link|
       player.url = "https://www.fantasypros.com#{link}"
   end 
   end
@@ -36,7 +42,7 @@ class Scraper
  
   
   def self.profile_scraper(player)
-    @doc = Nokogiri::HTML(open("https://www.fantasypros.com/nfl/players/#{player}.php"))
+    @doc = player.url
     @profile_hash = {}
     @profile_hash[:week] = @doc.css(".outlook").css("h4").text
     @profile_hash[:next_game] = @doc.css(".outlook").css(".next-game").text.strip.gsub("\n",'')
