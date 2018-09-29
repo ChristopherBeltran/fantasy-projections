@@ -23,4 +23,10 @@ class Projections::Player
       x+=1
     end 
   end 
+  
+  def self.url_sub
+    @@all.each do |player|
+      player.url.gsub!("projections", "players")
+    end 
+  end 
 end 
