@@ -3,7 +3,7 @@ require 'nokogiri'
 require 'open-uri'
 require_relative 'player'
 
-class Projections::Scraper
+class Scraper
   
  def self.qb_scraper
     @qb_doc = Nokogiri::HTML(open("https://www.fantasypros.com/nfl/projections/qb.php"))
@@ -19,6 +19,18 @@ class Projections::Scraper
     Player.all.zip(points_columns).each do |player, proj|
       player.projection = @qb_doc.css("td")[proj].text
     end 
+  end
+  
+  def self.url_scraper
+    links = @qb_doc.css('td.player-label a').take(40).map { |link| link['href'] }
+    pro = []
+   links.each do |i| 
+     if i.include? "php"
+       pro << i
+     end 
+     Player.all.zip(pro).each do |player, link|
+      player.url = "https://www.fantasypros.com#{link}"
+  end 
   end
 
  
@@ -42,3 +54,5 @@ class Projections::Scraper
     @profile_hash
   end 
   end 
+
+end 
