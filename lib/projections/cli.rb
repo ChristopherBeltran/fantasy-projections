@@ -4,7 +4,7 @@ class Projections::CLI
 
 def call
   Projections::Scraper.scrape_all
-  Projections::Player.display
+  start
   binding.pry
   end 
 
@@ -12,18 +12,13 @@ def start
   puts "Welcome to Fantasy Quarterbacks!"
   puts "You can view in-depth stats for this weeks top fantasy football quarterbacks."
   puts "Please select the # of the QB you'd like to view stats for."
+  Projections::Player.display
   
-  input = gets.strip
+  input = gets.chomp.to_i
+  qb = Projections::Player.all[input-1]
   
-  if input == "1"
-    overall_list
+  Projections::Scraper.profile_scraper(qb)
     
-    elsif input == "2"
-    position_menu
-    
-  else
-    "Sorry, try again."
-  end 
 end 
   
 end 

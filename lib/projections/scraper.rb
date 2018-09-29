@@ -42,7 +42,8 @@ class Projections::Scraper
  
   
   def self.profile_scraper(player)
-    @doc = player.url
+    @doc = Nokogiri::HTML(open(player.url))
+    player.profile_details = []
     @profile_hash = {}
     @profile_hash[:week] = @doc.css(".outlook").css("h4").text
     @profile_hash[:next_game] = @doc.css(".outlook").css(".next-game").text.strip.gsub("\n",'')
