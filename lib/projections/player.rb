@@ -1,5 +1,5 @@
 class Projections::Player
-  attr_accessor :qb_hash, :profile_details, :name, :projection, :url, :profile_hash
+  attr_accessor :qb_hash, :profile_details, :name, :projection, :url, :vitals, :week, :next_game, :news, :stat_categories, :stat_totals
   
 @@all = []
 
@@ -9,19 +9,10 @@ class Projections::Player
     @url = url
     @profile_details = profile_details
     @@all << self 
-  
   end
   
   def self.all
     @@all
-  end 
-  
-  def self.display
-    x = 1
-    @@all.each do |player|
-  puts "##{x}. #{player.name}        --------->         Projected Points: #{player.projection}"
-      x+=1
-    end 
   end 
   
   def self.url_sub
@@ -29,4 +20,5 @@ class Projections::Player
       player.url.gsub!("projections", "players")
     end 
   end 
+  
 end 

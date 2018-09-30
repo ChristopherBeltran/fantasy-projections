@@ -36,29 +36,26 @@ class Projections::Scraper
      end 
      Projections::Player.all.zip(pro).each do |player, link|
       player.url = "https://www.fantasypros.com#{link}"
-  end 
+    end 
+  Projections::Player.url_sub
   end
 
  
   
   def self.profile_scraper(player)
     @doc = Nokogiri::HTML(open(player.url))
-    player.profile_details = []
-    @profile_hash = {}
-    @profile_hash[:week] = @doc.css(".outlook").css("h4").text
-    @profile_hash[:next_game] = @doc.css(".outlook").css(".next-game").text.strip.gsub("\n",'')
-    @profile_hash[:news] = @doc.css(".content").css("p").first.text
-    stat_names = []
+    player.stat_categories = []
+    player.stat_totals = []
+    player.vitals = @doc.css("h5").first.text
+    player.week = @doc.css(".outlook").css("h4").text
+    player.next_game = @doc.css(".outlook").css(".next-game").text.strip.gsub("\n",'')
+    player.news = @doc.css(".content").css("p").first.text
     @doc.css(".all-stats").css("th").each do |stat|
-      stat_names << stat.text
-    @profile_hash[:stat_categories] = stat_names
-    stat_contents = []
+      player.stat_categories << stat.text
     @doc.css(".all-stats").css("td").each do |stat|
-      stat_contents << stat.text
-    @profile_hash[:stat_totals] = stat_contents
+      player.stat_totals << stat.text
       end 
     end
-    @profile_hash
   end 
   end 
 
