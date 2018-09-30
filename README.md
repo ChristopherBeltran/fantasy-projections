@@ -21,7 +21,8 @@ Or install it yourself as:
 ## Usage
 
 Type the following and then follow the on-screen prompts:
-```$ fantasy-projections```
+
+    $ fantasy-projections
 
 ## Development
 
