@@ -20,7 +20,8 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Type the following and then follow the on-screen prompts:
+```$ fantasy-projections```
 
 ## Development
 
