@@ -1,8 +1,6 @@
-# Fantasy::Projections
+# FantasyProjections
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/fantasy/projections`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+FantasyProjections provides the user a CLI to view the current weeks top Quarterbacks in accordance with fantasy football point projections, and then allows them to select any of those top players and view their specific profile page that contains more in-depth data such as their next game schedule, more detailed stats, and their latest news blurb.
 
 ## Installation
 
