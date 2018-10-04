@@ -1,7 +1,7 @@
 class Projections::CLI
 
 def call
-  Projections::Scraper.scrape_all
+  Projections::Scraper.qb_scraper
   start
   quit
   end 
