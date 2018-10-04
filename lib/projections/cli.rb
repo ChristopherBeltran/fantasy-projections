@@ -1,6 +1,3 @@
-require 'pry'
-require 'colorize'
-
 class Projections::CLI
 
 def call

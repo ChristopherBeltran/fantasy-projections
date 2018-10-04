@@ -1,8 +1,3 @@
-require 'pry'
-require 'nokogiri'
-require 'open-uri'
-require_relative 'player'
-
 class Projections::Scraper
   
   def self.scrape_all
