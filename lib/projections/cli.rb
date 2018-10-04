@@ -16,17 +16,17 @@ def start
   puts "Please select the # of the QB you'd like to view stats for. Or type 0 to exit."
   puts "----------------------------------------------------------------------------" 
    
-  input = gets.chomp.to_i
-  if input == 0
+  input = gets.chomp
+  if input == "0"
     self.quit
     
-  elsif input.between?(1, 20)
-    @qb = Projections::Player.all[input-1]
-      if @qb.vitals == nil
-      Projections::Scraper.profile_scraper(@qb)
-      profile_display(@qb)
+  elsif input.to_i.between?(1, 20)
+    qb = Projections::Player.all[input.to_i-1]
+      if qb.vitals == nil
+      Projections::Scraper.profile_scraper(qb)
+      profile_display(qb)
       else
-      profile_display(@qb)
+      profile_display(qb)
       end 
   else 
     puts "Sorry, can you try that again?"
